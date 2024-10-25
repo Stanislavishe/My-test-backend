@@ -20,14 +20,11 @@ object Games : Table("games") {
     fun insert(gamesDTO: GameDTO) {
         transaction {
             Games.insert {
-                it[gameId] = gamesDTO.gameId
-                it[name] = gamesDTO.name
-                it[backdrop] = gamesDTO.backdrop
-                it[logo] = gamesDTO.logo
+                it[gameId] = gamesDTO.gameID
+                it[name] = gamesDTO.title
                 it[description] = gamesDTO.description
-                it[downloadCount] = gamesDTO.downloadCount
                 it[version] = gamesDTO.version
-                it[weight] = gamesDTO.weight
+                it[weight] = gamesDTO.size
             }
         }
     }
@@ -38,14 +35,11 @@ object Games : Table("games") {
                 Games.selectAll().toList()
                     .map {
                         GameDTO(
-                            gameId = it[gameId],
-                            name = it[name],
-                            backdrop = it[backdrop],
-                            logo = it[logo],
+                            gameID = it[gameId],
+                            title = it[name],
                             description = it[description],
-                            weight = it[weight],
-                            version = it[version],
-                            downloadCount = it[downloadCount]
+                            size = it[weight],
+                            version = it[version]
                         )
                     }
             }
